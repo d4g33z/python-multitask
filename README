@@ -1,0 +1,44 @@
+--------------------------------------------------------------------------
+multitask:  Cooperative multitasking and asynchronous I/O using generators
+
+Author: Christopher Stawarz <cstawarz@gmail.com>
+Version: 0.2.0
+June 11, 2007
+--------------------------------------------------------------------------
+
+
+Introduction
+------------
+
+multitask allows Python programs to use generators (a.k.a. coroutines)
+to perform cooperative multitasking and asynchronous I/O.
+Applications written using multitask consist of a set of cooperating
+tasks that yield to a shared task manager whenever they perform a
+(potentially) blocking operation, such as I/O on a socket or getting
+data from a queue.  The task manager temporarily suspends the task
+(allowing other tasks to run in the meantime) and then restarts it
+when the blocking operation is complete.  Such an approach is suitable
+for applications that would otherwise have to use select() and/or
+multiple threads to achieve concurrency.
+
+multitask is free software, distributed under the MIT license.
+
+
+Requirements
+------------
+
+multitask requires Python 2.5 or later.  No additional software is
+required.
+
+
+Documentation
+-------------
+
+multitask provides extensive online documentation, which can be
+accessed from the Python prompt via 'help(multitask)'.  In addition,
+the examples directory contains scripts that demonstrate basic usage
+of the module.
+
+For more information, please visit
+
+  http://code.google.com/p/python-multitask/

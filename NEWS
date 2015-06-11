@@ -1,0 +1,41 @@
+0.2.0 (2007-06-11)
+------------------
+
+* Child tasks now return values to their parent by raising
+  StopIteration with the return values as arguments:
+
+    >>> def parent():
+    ...     print (yield return_none())
+    ...     print (yield return_one())
+    ...     print (yield return_many())
+    ... 
+    >>> def return_none():
+    ...     yield
+    ...     # implicit StopIteration here
+    ... 
+    >>> def return_one():
+    ...     yield
+    ...     raise StopIteration(1)
+    ... 
+    >>> def return_many():
+    ...     yield
+    ...     raise StopIteration(2, 3)
+    ... 
+    >>> multitask.add(parent())
+    >>> multitask.run()
+    None
+    1
+    (2, 3)
+
+  This mechanism was suggested by Dustin Mitchell [1] and provides a
+  cleaner, more explicit way of returning values than the mechanism
+  used in multitask 0.1.0 (which was to assume that the last value
+  yielded by a child was its return value).
+
+  [1] http://mail.python.org/pipermail/python-list/2007-May/438370.html
+
+* Added get_default_task_manager() to provide access to the default
+  TaskManager instance used by add() and run()
+
+* Added readline(), which (on Unix-like systems) is useful for doing
+  non-blocking reads from the stdout of a child process
